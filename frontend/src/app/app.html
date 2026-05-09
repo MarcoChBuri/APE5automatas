@@ -1,0 +1,66 @@
+<main class="shell">
+	<section class="title-block">
+		<span class="eyebrow">Validador de autómatas</span>
+		<h1>Elige una tabla, arma la cadena con sus símbolos y valida.</h1>
+	</section>
+
+	<section class="automata-grid">
+		@for (automaton of automata; track automaton.id) {
+			<button
+				type="button"
+				class="automata-card"
+				[class.active]="selectedAutomaton().id === automaton.id"
+				[attr.data-accent]="automaton.accent"
+				(click)="selectAutomaton(automaton.id)"
+			>
+				<div class="card-label">{{ automaton.label }}</div>
+				<div class="card-description">{{ automaton.description }}</div>
+				<div class="card-alphabet">{{ automaton.alphabet }}</div>
+			</button>
+		}
+	</section>
+
+	@if (selectedAutomaton(); as automaton) {
+		<section class="workspace-card">
+			<div class="workspace-header">
+				<div>
+					<span class="eyebrow small">{{ automaton.label }}</span>
+					<h2>Arma la cadena con botones</h2>
+				</div>
+				<p>{{ automaton.description }}</p>
+			</div>
+
+			<div class="chain-box">
+				<input type="text" [value]="chain()" readonly />
+			</div>
+
+			<div class="symbol-row">
+				@for (symbol of automaton.alphabet.split(''); track symbol) {
+					<button type="button" class="symbol-button" (click)="appendSymbol(symbol)">
+						{{ symbol }}
+					</button>
+				}
+			</div>
+
+			<div class="action-row">
+				<button type="button" class="ghost-button" (click)="backspace()">Borrar último</button>
+				<button type="button" class="ghost-button" (click)="clearChain()">Limpiar</button>
+				<button type="button" class="primary-button" [disabled]="!canSubmit()" (click)="submit()">
+					@if (loading()) {
+						Validando...
+					} @else {
+						Validar cadena
+					}
+				</button>
+			</div>
+
+			<div class="result-line" [class.accepted]="result()?.accepted" [class.rejected]="result() && !result()?.accepted">
+				@if (result()) {
+					{{ result()!.accepted ? 'CADENA ACEPTADA' : 'CADENA RECHAZADA' }}
+				} @else {
+					Selecciona símbolos y valida la cadena.
+				}
+			</div>
+		</section>
+	}
+</main>

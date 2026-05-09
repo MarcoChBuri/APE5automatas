@@ -1,0 +1,7 @@
+.vscode/
+sprin.zip
+backend/build/
+backend/.gradle/
+frontend/dist/
+frontend/node_modules/
+frontend/.angular/
