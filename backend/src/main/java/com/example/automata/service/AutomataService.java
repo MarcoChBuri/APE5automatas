@@ -2,7 +2,23 @@ package com.example.automata.service;
 
 import org.springframework.stereotype.Service;
 
+/**
+ * ⚠️ DEPRECATED - NO UTILIZAR
+ * 
+ * Este archivo se mantiene como referencia histórica únicamente.
+ * 
+ * La funcionalidad ha sido refactorizada a 3 servicios separados,
+ * cada uno implementando la conversión NFA -> DFA de forma independiente:
+ * 
+ *  1. Ejercicio1Service.java (Tabla 1 - Alfabeto: K, G, X, F)
+ *  2. Ejercicio2Service.java (Tabla 2 - Alfabeto: H, S, C)
+ *  3. Ejercicio3Service.java (Tabla 3 - Alfabeto: S, A, R)
+ * 
+ * El AutomataController ahora utiliza estos 3 servicios.
+ * NO ELIMINAR - Mantener como referencia.
+ */
 @Service
+@Deprecated(since = "2.0", forRemoval = false)
 public class AutomataService {
 
     public boolean validarTabla1(String cadena) {
